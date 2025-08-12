@@ -21,6 +21,7 @@ public with sharing class AccountChatterController {
     @AuraEnabled
     public static List<FeedItemWrapper> getRecordFeeds(Id recordId) {
         List<FeedItemWrapper> wrappedFeedItems = new List<FeedItemWrapper>();
+         if (recordId == null) return wrappedFeedItems;
         // Resolve related Account Id
         Id accountId = resolveAccountId(recordId);
         if (accountId == null) return wrappedFeedItems;
