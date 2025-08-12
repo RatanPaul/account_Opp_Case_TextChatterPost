@@ -29,7 +29,7 @@ public with sharing class AccountChatterController {
             SELECT Id, Body, CreatedDate, CreatedBy.Name,
                    (SELECT CommentBody, CreatedDate, CreatedBy.Name FROM FeedComments ORDER BY CreatedDate)
             FROM AccountFeed
-            WHERE ParentId = :recordId AND Type = 'TextPost'
+            WHERE ParentId = :accountId AND Type = 'TextPost'
             ORDER BY CreatedDate DESC
             LIMIT 50
         ];
@@ -72,7 +72,7 @@ public with sharing class AccountChatterController {
         if (accountId == null) return;
         
         FeedItem post = new FeedItem();
-        post.ParentId = recordId;
+        post.ParentId = accountId;
         post.Body = body;
         post.Type = 'TextPost'; // Required for text-based feed posts
         insert post;
